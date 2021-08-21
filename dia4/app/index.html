@@ -1,12 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dia 4</title>
-  </head>
-  <body>
-    <script type="module" src="/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dia 04</title>
+</head>
+
+<body>
+
+  <span class="title-container">
+    <h1 class="title">B.Academy pré-work (Dia 04)</h1>
+  </span>
+
+  <main class="main-container">
+    <section class="section">
+      <h2 class="section-title">Cars Details</h2>
+
+      <form data-js="third form" class="cars-form form">
+        <div class="inputs-container">
+
+          <div>
+            <label for="car-image">Image URL:</label>
+            <input type="text" id="car-image" name="car-image" class="input" required />
+          </div>
+
+          <div>
+            <label for="car-brand">Brand/Model:</label>
+            <input type="text" id="car-brand" name="car-brand" class="input" required />
+          </div>
+
+          <div>
+            <label for="car-year">Year:</label>
+            <input type="number" id="car-year" name="car-year" class="input" required />
+          </div>
+
+          <div>
+            <label for="car-plate">Plate:</label>
+            <input type="text" id="car-plate" name="car-plate" class="input" required />
+          </div>
+
+          <div>
+            <label for="car-color">Color:</label>
+            <input type="color" id="car-color" name="car-color" />
+          </div>
+
+        </div>
+
+        <div class="btn-container">
+          <button type="submit" class="submit-btn">Submit</button>
+        </div>
+
+        <table class="cars-table">
+
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Brand/Model</th>
+              <th>Year</th>
+              <th>Plate</th>
+              <th>Color</th>
+            </tr>
+          </thead>
+
+          <tbody data-js="cars-table"></tbody>
+        </table>
+
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+
 </html>
