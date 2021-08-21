@@ -13,7 +13,7 @@ const capitalizeFirstLetter = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-inputName.addEventListener("input", (e) => {
+const onInputChange = (e) => {
   const inputNameValue = e.target.value.toLowerCase();
   const finalInputValue = inputNameValue
     .split(" ")
@@ -21,14 +21,16 @@ inputName.addEventListener("input", (e) => {
     .join(" ");
 
   e.target.value = finalInputValue;
-});
+};
+
+inputName.addEventListener("input", onInputChange, false);
 
 //
 // Solução do SEGUNDO exercício
 //
 
 const colorsContainer = document.createElement("div");
-const formEl = document.querySelector('[data-js="form"]');
+const formEl = document.querySelector('[data-js="second form"]');
 const optionsArr = ["red", "blue", "pink", "black", "purple"];
 const selectEl = document.createElement("select");
 
@@ -44,7 +46,7 @@ const createColorDiv = (color) => {
   colorDiv.style.background = `${color}`;
   colorDiv.style.width = "6rem";
   colorDiv.style.height = "6rem";
-  colorDiv.style.marginBottom = "1rem";
+  colorDiv.style.borderRadius = "0.7rem";
   return colorDiv;
 };
 
@@ -62,8 +64,10 @@ const onSelectChange = (e) => {
   });
 };
 
+colorsContainer.classList.add("colors-container");
+
 formEl.appendChild(selectEl);
-document.body.appendChild(colorsContainer);
+formEl.appendChild(colorsContainer);
 
 selectEl.setAttribute("multiple", "");
 selectEl.addEventListener("change", onSelectChange, false);

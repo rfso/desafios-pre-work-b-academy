@@ -1,17 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dia 3</title>
-  </head>
-  <body>
-      <form data-js="form" class="form">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dia 03</title>
+</head>
+
+<body>
+
+  <span class="title-container">
+    <h1 class="title">B.Academy pré-work (Dia 03)</h1>
+  </span>
+
+  <main class="main-container">
+
+    <section class="first-exercise section">
+      <h2 class="section-title">First Exercise</h2>
+      <form data-js="form" class="first-exercise_form form">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" data-js="name" />
+        <input type="text" id="name" name="name" data-js="name" class="first-exercise_input input" />
+      </form>
+    </section>
+
+    <section class="second-exercise section">
+      <h2 class="section-title">Second Exercise</h2>
+      <form data-js="second form" class="second-exercise_form form">
         <label for="color">Pick a color below:</label>
       </form>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+    </section>
+
+    <section class="third-exercise section">
+      <h2 class="section-title">Third Exercise</h2>
+      <h3 class="section-subtitle">Car details:</h3>
+
+      <form data-js="third form" class="third-exercise_form form">
+        <div class="inputs-container">
+
+          <div>
+            <label for="car-image">Image URL:</label>
+            <input type="text" id="car-image" name="car-image" class="input" required/>
+          </div>
+
+          <div>
+            <label for="car-brand">Brand/Model:</label>
+            <input type="text" id="car-brand" name="car-brand" class="input" required/>
+          </div>
+
+          <div>
+            <label for="car-year">Year:</label>
+            <input type="number" id="car-year" name="car-year" class="input" required/>
+          </div>
+
+          <div>
+            <label for="car-plate">Plate:</label>
+            <input type="text" id="car-plate" name="car-plate" class="input" required/>
+          </div>
+
+          <div>
+            <label for="car-color">Color:</label>
+            <input type="color" id="car-color" name="car-color" />
+          </div>
+
+        </div>
+
+        <div class="btn-container">
+          <button type="submit" class="submit-btn">Submit</button>
+        </div>
+
+        <table class="cars-table">
+
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Brand/Model</th>
+              <th>Year</th>
+              <th>Plate</th>
+              <th>Color</th>
+            </tr>
+          </thead>
+
+          <tbody data-js="cars-table"></tbody>
+        </table>
+
+      </form>
+    </section>
+
+  </main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>

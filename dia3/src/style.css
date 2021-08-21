@@ -1,23 +1,130 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root {
+  --color-primary: #000;
+  --color-secondary: #fff;
+  --color-accent: #f36;
+  --color-text: #777;
 }
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+}
+
+.title-container .title {
+  color: var(--color-primary);
+  border-bottom: var(--color-accent) solid 0.4rem;
+  font-size: 3rem;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 5rem;
+  margin: 4rem 0;
+}
+
+.main-container {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+  font-weight: bold;
+  justify-content: space-evenly;
+  margin: 2rem;
 }
 
 .form {
-  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  font-size: 2rem;
   gap: 1rem;
   margin: 2rem;
+}
+
+.section {
+  border: 0.2rem solid var(--color-primary);
+  border-radius: 0.3rem;
+  color: var(--color-text);
+  margin: 1.5rem 0 0 1.5rem;
+}
+
+.section .section-title {
+  color: var(--color-accent);
+  padding: 1.1rem;
+  text-align: center;
+}
+
+.section .section-subtitle {
+  font-size: 1.8rem;
+  margin: 4rem 0;
+  text-align: center;
+}
+
+.first-exercise .first-exercise_form  {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.main-container .second-exercise {
+  max-width: 17.5rem;
+}
+
+.third-exercise .third-exercise_form {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 50rem;
+  gap: 2rem;
+}
+
+.input {
+  border: 0.2rem solid transparent;
+  border-bottom: 0.15rem solid var(--color-primary);
+}
+
+.submit-btn {
+  background: var(--color-accent);
+  border: 0.2rem solid var(--color-accent);
+  border-radius: 0.3rem;
+  color: var(--color-secondary);
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  width: 7rem;
+}
+
+.submit-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-accent);
+  border: 0.2rem solid var(--color-primary);
+}
+
+.inputs-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.colors-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cars-table {
+  border: 0.2rem solid var(--color-primary);
+  border-radius: .3rem;
+  border-spacing: 3rem 1rem;
+  text-align: center;
+  margin-top: 2rem;
 }
