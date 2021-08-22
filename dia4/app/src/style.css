@@ -95,7 +95,10 @@ html, body {
 }
 
 .btn-container {
+  align-items: center;
   display: flex;
+  gap: 1rem;
+  flex-direction: column;
   justify-content: center;
   margin-top: 0.5rem;
 }
