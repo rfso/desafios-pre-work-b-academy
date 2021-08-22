@@ -15,35 +15,35 @@ function checkBody (req, res, next) {
 }
 
 function areAllFieldsValid (body) {
-  const fields = [body.image, body.brandModel, body.year, body.plate, body.color]
+  const fields = [body.carImage, body.carBrand, body.carYear, body.carPlate, body.carColor]
   return fields.every(field => typeof field !== 'undefined' && field !== '')
 }
 
 function checkAlreadyRegistered (req, res, next) {
-  if (typeof data[req.body.plate.toUpperCase()] !== 'undefined') {
+  if (typeof data[req.body.carPlate.toUpperCase()] !== 'undefined') {
     return res.status(400).json({ 
       error: true, 
-      message: `Já existe um carro cadastrado com a placa ${req.body.plate}` 
+      message: `Já existe um carro cadastrado com a placa ${req.body.carPlate}` 
     })
   }
   next()
 }
 
 router.post('/', checkBody, checkAlreadyRegistered, (req, res) => {
-  data[req.body.plate.toUpperCase()] = {
-    image: req.body.image,
-    brandModel: req.body.brandModel,
-    year: req.body.year,
-    plate: req.body.plate,
-    color: req.body.color
+  data[req.body.carPlate.toUpperCase()] = {
+    carImage: req.body.carImage,
+    carBrand: req.body.carBrand,
+    carYear: req.body.carYear,
+    carPlate: req.body.carPlate,
+    carColor: req.body.carColor
   }
 
-  res.json({ message: `O carro com placa ${req.body.plate} foi cadastrado com sucesso` })
+  res.json({ message: `O carro com placa ${req.body.carPlate} foi cadastrado com sucesso` })
 })
 
 router.delete('/', (req, res) => {
-  delete data[req.body.plate.toUpperCase()]
-  res.json({ message: `O carro com placa ${req.body.plate} foi removido com sucesso` })
+  delete data[req.body.carPlate.toUpperCase()]
+  res.json({ message: `O carro com placa ${req.body.carPlate} foi removido com sucesso` })
 })
 
 module.exports = router

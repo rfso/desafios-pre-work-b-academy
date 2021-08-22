@@ -1,4 +1,5 @@
 import "./style.css";
+import { GET, POST } from "./apiMethods";
 
 const apiEndpoint = "http://localhost:3333/cars";
 
@@ -12,7 +13,7 @@ const createImage = (value) => {
   const imgEl = document.createElement("img");
   imgEl.src = value.src;
   imgEl.width = 100;
-  imgEl.alt = value.alt
+  imgEl.alt = value.alt;
   imgEl.style.borderRadius = "0.2rem";
   imgEl.style.marginRight = "0.2rem";
   tdEl.appendChild(imgEl);
@@ -42,7 +43,7 @@ const elementsTypes = {
   color: createColor,
 };
 
-const onSubmit = (e) => {
+const onSubmit = async (e) => {
   e.preventDefault();
   const getElement = getFormElement(e);
 
@@ -54,7 +55,23 @@ const onSubmit = (e) => {
     carColor: getElement("car-color").value,
   };
 
+  const carsInfoPostResult = await POST(apiEndpoint, data);
+
+  if (carsInfoPostResult.error) {
+    console.log(
+      "An error has occurred while trying to register the car:",
+      carsInfoPostResult.message
+    );
+    return;
+  }
+
+  const noContent = document.querySelector("[data-js=no-content]");
+  if (noContent) {
+    carsTableBodyEl.removeChild(noContent)
+  }
+
   createTableRow(data);
+
   clearAllFields(e);
   focusAfterSubmit(e);
 };
@@ -89,6 +106,7 @@ const createNoCarRow = () => {
   tdEl.textContent = "No cars have been found";
   tdEl.style.color = "#f36";
 
+  trEl.dataset.js = "no content";
   trEl.appendChild(tdEl);
   carsTableBodyEl.appendChild(trEl);
 };
@@ -103,21 +121,19 @@ const focusAfterSubmit = (e) => {
 };
 
 const getCarsFromApi = async () => {
-  const carsInfoResult = await fetch(apiEndpoint)
-    .then((res) => res.json())
-    .catch((error) => ({ error: true, message: error.message }));
+  const carsInfoGetResult = await GET(apiEndpoint);
 
-  if (carsInfoResult.error) {
-    console.log("An error has occurred:", carsInfoResult.message);
+  if (carsInfoGetResult.error) {
+    console.log("An error has occurred:", carsInfoGetResult.message);
     return;
   }
 
-  if (carsInfoResult.length === 0) {
+  if (carsInfoGetResult.length === 0) {
     createNoCarRow();
     return;
   }
 
-  carsInfoResult.forEach(createTableRow);
+  carsInfoGetResult.forEach(createTableRow);
 };
 
 getCarsFromApi();
