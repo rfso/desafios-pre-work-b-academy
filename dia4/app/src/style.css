@@ -61,7 +61,6 @@ html, body {
 
 .section .cars-form {
   display: flex;
-  flex-wrap: wrap;
   max-width: 50rem;
   gap: 2rem;
 }
@@ -71,7 +70,7 @@ html, body {
   border-bottom: 0.15rem solid var(--color-primary);
 }
 
-.submit-btn {
+.submit-btn, .btn {
   background: var(--color-accent);
   border: 0.2rem solid var(--color-accent);
   border-radius: 0.3rem;
@@ -83,7 +82,7 @@ html, body {
   width: 7rem;
 }
 
-.submit-btn:hover {
+.submit-btn:hover, .btn:hover {
   background: var(--color-primary);
   color: var(--color-accent);
   border: 0.2rem solid var(--color-primary);
@@ -106,7 +105,7 @@ html, body {
 .cars-table {
   border: 0.2rem solid var(--color-primary);
   border-radius: .3rem;
-  border-spacing: 3rem 1rem;
+  border-spacing: 1.5rem 1.2rem;
   text-align: center;
   margin-top: 2rem;
 }

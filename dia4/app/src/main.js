@@ -1,5 +1,5 @@
 import "./style.css";
-import { GET, POST } from "./apiMethods";
+import { GET, POST, DELETE } from "./apiMethods";
 
 const apiEndpoint = "http://localhost:3333/cars";
 
@@ -34,6 +34,7 @@ const createColor = (value) => {
   divEl.style.background = value;
   divEl.style.borderRadius = "0.2rem";
   tdEl.appendChild(divEl);
+
   return tdEl;
 };
 
@@ -48,16 +49,17 @@ const onSubmit = async (e) => {
   const getElement = getFormElement(e);
 
   const data = {
-    carImage: getElement("car-image").value,
-    carBrand: getElement("car-brand").value,
-    carYear: getElement("car-year").value,
-    carPlate: getElement("car-plate").value,
-    carColor: getElement("car-color").value,
+    image: getElement("car-image").value,
+    brandModel: getElement("car-brand").value,
+    year: getElement("car-year").value,
+    plate: getElement("car-plate").value,
+    color: getElement("car-color").value,
   };
 
   const carsInfoPostResult = await POST(apiEndpoint, data);
 
   if (carsInfoPostResult.error) {
+    showMessageInfo(carsInfoPostResult.message);
     console.log(
       "An error has occurred while trying to register the car:",
       carsInfoPostResult.message
@@ -65,9 +67,11 @@ const onSubmit = async (e) => {
     return;
   }
 
+  showMessageInfo(carsInfoPostResult.message);
+
   const noContent = document.querySelector("[data-js=no-content]");
   if (noContent) {
-    carsTableBodyEl.removeChild(noContent)
+    carsTableBodyEl.removeChild(noContent);
   }
 
   createTableRow(data);
@@ -80,13 +84,14 @@ carsFormEl.addEventListener("submit", onSubmit, false);
 
 const createTableRow = (data) => {
   const trEl = document.createElement("tr");
+  trEl.dataset.plate = data.plate;
 
   const carElements = [
-    { type: "image", value: { src: data.carImage, alt: data.carBrand } },
-    { type: "text", value: data.carBrand },
-    { type: "text", value: data.carYear },
-    { type: "text", value: data.carPlate },
-    { type: "color", value: data.carColor },
+    { type: "image", value: { src: data.image, alt: data.brandModel } },
+    { type: "text", value: data.brandModel },
+    { type: "text", value: data.year },
+    { type: "text", value: data.plate },
+    { type: "color", value: data.color },
   ];
 
   carElements.forEach((carElement) => {
@@ -94,7 +99,66 @@ const createTableRow = (data) => {
     trEl.appendChild(tdEl);
   });
 
+  const carDeleteBtn = createCarDeleteBtn(data);
+
+  trEl.appendChild(carDeleteBtn);
   carsTableBodyEl.appendChild(trEl);
+};
+
+const handleDelete = async (e) => {
+  e.preventDefault();
+  const buttonTarget = e.target;
+  const plate = e.target.dataset.plate;
+
+  const carsInfoDeleteResult = await DELETE(apiEndpoint, { plate });
+
+  if (carsInfoDeleteResult.error) {
+    showMessageInfo(carsInfoDeleteResult.message);
+    console.log(
+      "An error has occurred while trying to delete the car:",
+      carsInfoDeleteResult.message
+    );
+    return;
+  }
+
+  showMessageInfo(carsInfoDeleteResult.message);
+
+  const trEl = document.querySelector(`tr[data-plate="${plate}"]`);
+  carsTableBodyEl.removeChild(trEl);
+
+  buttonTarget.removeEventListener("click", handleDelete, false);
+
+  const allTrs = carsTableBodyEl.querySelector("tr");
+  if (!allTrs) createNoCarRow();
+};
+
+const showMessageInfo = (messageInfo) => {
+  const InfoEl = document.createElement("span");
+  const buttonContainer = document.querySelector(
+    '[data-js="submit btn container"]'
+  );
+
+  console.log(buttonContainer, InfoEl)
+
+  InfoEl.textContent = messageInfo;
+  InfoEl.style.color = "#f36";
+
+  buttonContainer.appendChild(InfoEl);
+
+  setTimeout(() => {
+    InfoEl.remove();
+  }, 6000);
+};
+
+const createCarDeleteBtn = (data) => {
+  const buttonEl = document.createElement("button");
+  buttonEl.textContent = "Delete";
+  buttonEl.dataset.plate = data.plate;
+  buttonEl.addEventListener("click", handleDelete);
+  buttonEl.classList.add("btn");
+  buttonEl.style.marginTop = "1.2rem";
+
+  return buttonEl;
 };
 
 const createNoCarRow = () => {
@@ -106,7 +170,7 @@ const createNoCarRow = () => {
   tdEl.textContent = "No cars have been found";
   tdEl.style.color = "#f36";
 
-  trEl.dataset.js = "no content";
+  trEl.dataset.js = "no-content";
   trEl.appendChild(tdEl);
   carsTableBodyEl.appendChild(trEl);
 };
@@ -124,6 +188,7 @@ const getCarsFromApi = async () => {
   const carsInfoGetResult = await GET(apiEndpoint);
 
   if (carsInfoGetResult.error) {
+    showMessageInfo(carsInfoGetResult.message);
     console.log("An error has occurred:", carsInfoGetResult.message);
     return;
   }
