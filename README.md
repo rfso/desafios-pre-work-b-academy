@@ -4,7 +4,7 @@
   
 ##  Informações gerais
 
-- **Importante**:  Acesse o arquivo do [Notion linkado aqui](https://striped-louse-c2b.notion.site/B-Academy-pr-work-2a19d46acdfe4ab8a2e381f62dea56a9) para mais informações relativas às tomadas de decisões, abordagens e dificuldades enfrentadas.
+- **Importante**:  Acesse o arquivo do [Notion linkado aqui](https://rfso.notion.site/B-Academy-pr-work-2a19d46acdfe4ab8a2e381f62dea56a9) para mais informações relativas às tomadas de decisões, abordagens e dificuldades enfrentadas.
 
 - **A respeito do repositório**: O presente repositório foi criado com o intuito de apresentar as soluções dos exercícios propostos durante o pré-work da B.Academy, realizado pela brainn.co.
 
